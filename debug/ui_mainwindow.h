@@ -38,22 +38,22 @@ public:
     QSplitter *splitter;
     QSplitter *splitter_2;
     QSplitter *splitter_3;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout_3;
     QLabel *ipaddrLabel;
     QSpacerItem *horizontalSpacer_3;
-    QLineEdit *portLineEdit;
-    QWidget *widget1;
+    QLineEdit *ipaddrLineEdit;
+    QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout_2;
     QLabel *multicastIpaddrLabel;
     QSpacerItem *horizontalSpacer_2;
     QLineEdit *multicastIpaddrLineEdit;
-    QWidget *widget2;
+    QWidget *layoutWidget2;
     QHBoxLayout *horizontalLayout;
     QLabel *portLabel;
     QSpacerItem *horizontalSpacer;
-    QLineEdit *ipaddrLineEdit;
-    QWidget *widget3;
+    QLineEdit *portLineEdit;
+    QWidget *layoutWidget3;
     QHBoxLayout *horizontalLayout_4;
     QPushButton *startTransmitButton;
     QSpacerItem *horizontalSpacer_4;
@@ -86,14 +86,14 @@ public:
         splitter_3 = new QSplitter(splitter_2);
         splitter_3->setObjectName(QString::fromUtf8("splitter_3"));
         splitter_3->setOrientation(Qt::Vertical);
-        widget = new QWidget(splitter_3);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        horizontalLayout_3 = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(splitter_3);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        horizontalLayout_3 = new QHBoxLayout(layoutWidget);
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-        ipaddrLabel = new QLabel(widget);
+        ipaddrLabel = new QLabel(layoutWidget);
         ipaddrLabel->setObjectName(QString::fromUtf8("ipaddrLabel"));
 
         horizontalLayout_3->addWidget(ipaddrLabel);
@@ -102,20 +102,20 @@ public:
 
         horizontalLayout_3->addItem(horizontalSpacer_3);
 
-        portLineEdit = new QLineEdit(widget);
-        portLineEdit->setObjectName(QString::fromUtf8("portLineEdit"));
+        ipaddrLineEdit = new QLineEdit(layoutWidget);
+        ipaddrLineEdit->setObjectName(QString::fromUtf8("ipaddrLineEdit"));
 
-        horizontalLayout_3->addWidget(portLineEdit);
+        horizontalLayout_3->addWidget(ipaddrLineEdit);
 
-        splitter_3->addWidget(widget);
-        widget1 = new QWidget(splitter_3);
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        horizontalLayout_2 = new QHBoxLayout(widget1);
+        splitter_3->addWidget(layoutWidget);
+        layoutWidget1 = new QWidget(splitter_3);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        multicastIpaddrLabel = new QLabel(widget1);
+        multicastIpaddrLabel = new QLabel(layoutWidget1);
         multicastIpaddrLabel->setObjectName(QString::fromUtf8("multicastIpaddrLabel"));
 
         horizontalLayout_2->addWidget(multicastIpaddrLabel);
@@ -124,20 +124,20 @@ public:
 
         horizontalLayout_2->addItem(horizontalSpacer_2);
 
-        multicastIpaddrLineEdit = new QLineEdit(widget1);
+        multicastIpaddrLineEdit = new QLineEdit(layoutWidget1);
         multicastIpaddrLineEdit->setObjectName(QString::fromUtf8("multicastIpaddrLineEdit"));
 
         horizontalLayout_2->addWidget(multicastIpaddrLineEdit);
 
-        splitter_3->addWidget(widget1);
-        widget2 = new QWidget(splitter_3);
-        widget2->setObjectName(QString::fromUtf8("widget2"));
-        horizontalLayout = new QHBoxLayout(widget2);
+        splitter_3->addWidget(layoutWidget1);
+        layoutWidget2 = new QWidget(splitter_3);
+        layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
+        horizontalLayout = new QHBoxLayout(layoutWidget2);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        portLabel = new QLabel(widget2);
+        portLabel = new QLabel(layoutWidget2);
         portLabel->setObjectName(QString::fromUtf8("portLabel"));
 
         horizontalLayout->addWidget(portLabel);
@@ -146,23 +146,23 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        ipaddrLineEdit = new QLineEdit(widget2);
-        ipaddrLineEdit->setObjectName(QString::fromUtf8("ipaddrLineEdit"));
+        portLineEdit = new QLineEdit(layoutWidget2);
+        portLineEdit->setObjectName(QString::fromUtf8("portLineEdit"));
 
-        horizontalLayout->addWidget(ipaddrLineEdit);
+        horizontalLayout->addWidget(portLineEdit);
 
-        splitter_3->addWidget(widget2);
+        splitter_3->addWidget(layoutWidget2);
         splitter_2->addWidget(splitter_3);
         splitter->addWidget(splitter_2);
-        widget3 = new QWidget(centralWidget);
-        widget3->setObjectName(QString::fromUtf8("widget3"));
-        widget3->setGeometry(QRect(10, 90, 123, 25));
-        horizontalLayout_4 = new QHBoxLayout(widget3);
+        layoutWidget3 = new QWidget(centralWidget);
+        layoutWidget3->setObjectName(QString::fromUtf8("layoutWidget3"));
+        layoutWidget3->setGeometry(QRect(10, 90, 123, 25));
+        horizontalLayout_4 = new QHBoxLayout(layoutWidget3);
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
-        startTransmitButton = new QPushButton(widget3);
+        startTransmitButton = new QPushButton(layoutWidget3);
         startTransmitButton->setObjectName(QString::fromUtf8("startTransmitButton"));
 
         horizontalLayout_4->addWidget(startTransmitButton);
@@ -172,9 +172,10 @@ public:
         horizontalLayout_4->addItem(horizontalSpacer_4);
 
         MainWindow->setCentralWidget(centralWidget);
-        startTransmitButton->raise();
+        layoutWidget->raise();
         showTheResvData->raise();
         showTheSendData->raise();
+        splitter->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1280, 23));

@@ -51,7 +51,7 @@ void tcpServer::acceptConnection()
 
 /**
  * @brief tcpServer::resvDataAndFlush
- * 接收数据并将其显示到界面当中
+ * 槽函数，接收数据并将其显示到界面当中
  */
 void tcpServer::resvDataAndFlush()
 {
@@ -60,6 +60,10 @@ void tcpServer::resvDataAndFlush()
     qDebug() << data;
 }
 
+/**
+ * @brief tcpServer::~tcpServer
+ * 析构函数，把分配的内存释放出来
+ */
 tcpServer::~tcpServer()
 {
     if (this->pTcpServer->isListening())

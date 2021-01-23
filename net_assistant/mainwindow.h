@@ -17,6 +17,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+public slots:
+    void changeTxButton(QString ip);
+    void startNetworkAssistant();
 };
 
 #endif // MAINWINDOW_H
