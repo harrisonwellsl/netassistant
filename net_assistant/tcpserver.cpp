@@ -8,12 +8,13 @@
  * @param port
  * 构造函数
  */
-tcpServer::tcpServer(const QString &ip, quint16 port)
+tcpServer::tcpServer(const QString &ip, quint16 port, QTextBrowser *textBrowser)
 {
     qDebug() << ip;
     qDebug() << port;
     this->ip = new QHostAddress(ip);
     this->port = port;
+    this->pTextBrowser = textBrowser;
 }
 
 /**
@@ -72,6 +73,7 @@ void tcpServer::resvDataAndFlush()
 {
     qDebug() << "resv data";
     QByteArray data = this->pTcpSocketConnection->readAll();
+    this->pTextBrowser->append(QString(data));
     qDebug() << data;
 }
 

@@ -20,7 +20,7 @@ public:
 private:
     Ui::MainWindow *ui;
     /* TCP 服务器定义 */
-    bool tcpServerOpened = false;
+    bool tcpServerOpened;
     tcpServer *server;
     void tcpServerMode();
 

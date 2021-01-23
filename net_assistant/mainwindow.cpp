@@ -5,6 +5,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    this->tcpServerOpened = false;
+
     ui->setupUi(this);
     ui->startTransmitButton->setText(tr("&Start the network"));
     ui->startTransmitButton->setEnabled(false);
@@ -41,13 +43,6 @@ void MainWindow::startNetworkAssistant()
     qDebug() << "run here!";
     qDebug() << modeSlectBoxIndex;
 
-    /**
-    ui->modeSelectBox->addItem("UDP unicast");
-    ui->modeSelectBox->addItem("UDP multicast");
-    ui->modeSelectBox->addItem("TCP unicast");
-    ui->modeSelectBox->addItem("TCP server");
-     */
-
     switch (modeSlectBoxIndex)
     {
     case 0:
@@ -81,7 +76,7 @@ void MainWindow::tcpServerMode()
         /* 打开TCP服务器 */
         QString ip = this->ui->ipaddrLineEdit->text();
         qint16 port = this->ui->portLineEdit->text().toUShort();
-        this->server = new tcpServer(ip, port);
+        this->server = new tcpServer(ip, port, this->ui->showTheResvData);
         int status = this->server->tcpServerOpen();
         if (status < 0)
         {
@@ -100,6 +95,9 @@ void MainWindow::tcpServerMode()
     {
         this->server->tcpServerClose();
         delete this->server;
+        this->server = NULL;
+        this->tcpServerOpened = false;
+        this->ui->modeSelectBox->setEnabled(true);
         this->ui->startTransmitButton->setText("Start the network");
     }
 }
