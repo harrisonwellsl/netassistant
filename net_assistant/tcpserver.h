@@ -15,6 +15,7 @@ public:
     tcpServer(const QString& ip, quint16 port);
     ~tcpServer();
     int tcpServerOpen();
+    int tcpServerClose();
 
 private:
     QHostAddress *ip;

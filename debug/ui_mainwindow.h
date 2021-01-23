@@ -13,6 +13,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QComboBox>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
@@ -25,6 +26,7 @@
 #include <QtGui/QStatusBar>
 #include <QtGui/QTextBrowser>
 #include <QtGui/QToolBar>
+#include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -38,25 +40,26 @@ public:
     QSplitter *splitter;
     QSplitter *splitter_2;
     QSplitter *splitter_3;
-    QWidget *layoutWidget;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_3;
     QLabel *ipaddrLabel;
     QSpacerItem *horizontalSpacer_3;
     QLineEdit *ipaddrLineEdit;
-    QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout_2;
     QLabel *multicastIpaddrLabel;
     QSpacerItem *horizontalSpacer_2;
     QLineEdit *multicastIpaddrLineEdit;
-    QWidget *layoutWidget2;
     QHBoxLayout *horizontalLayout;
     QLabel *portLabel;
     QSpacerItem *horizontalSpacer;
     QLineEdit *portLineEdit;
-    QWidget *layoutWidget3;
+    QWidget *widget1;
+    QHBoxLayout *horizontalLayout_5;
     QHBoxLayout *horizontalLayout_4;
     QPushButton *startTransmitButton;
     QSpacerItem *horizontalSpacer_4;
+    QComboBox *modeSelectBox;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -86,14 +89,17 @@ public:
         splitter_3 = new QSplitter(splitter_2);
         splitter_3->setObjectName(QString::fromUtf8("splitter_3"));
         splitter_3->setOrientation(Qt::Vertical);
-        layoutWidget = new QWidget(splitter_3);
-        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        horizontalLayout_3 = new QHBoxLayout(layoutWidget);
+        widget = new QWidget(splitter_3);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        verticalLayout = new QVBoxLayout(widget);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
-        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-        ipaddrLabel = new QLabel(layoutWidget);
+        ipaddrLabel = new QLabel(widget);
         ipaddrLabel->setObjectName(QString::fromUtf8("ipaddrLabel"));
 
         horizontalLayout_3->addWidget(ipaddrLabel);
@@ -102,20 +108,18 @@ public:
 
         horizontalLayout_3->addItem(horizontalSpacer_3);
 
-        ipaddrLineEdit = new QLineEdit(layoutWidget);
+        ipaddrLineEdit = new QLineEdit(widget);
         ipaddrLineEdit->setObjectName(QString::fromUtf8("ipaddrLineEdit"));
 
         horizontalLayout_3->addWidget(ipaddrLineEdit);
 
-        splitter_3->addWidget(layoutWidget);
-        layoutWidget1 = new QWidget(splitter_3);
-        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
+
+        verticalLayout->addLayout(horizontalLayout_3);
+
+        horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        multicastIpaddrLabel = new QLabel(layoutWidget1);
+        multicastIpaddrLabel = new QLabel(widget);
         multicastIpaddrLabel->setObjectName(QString::fromUtf8("multicastIpaddrLabel"));
 
         horizontalLayout_2->addWidget(multicastIpaddrLabel);
@@ -124,20 +128,18 @@ public:
 
         horizontalLayout_2->addItem(horizontalSpacer_2);
 
-        multicastIpaddrLineEdit = new QLineEdit(layoutWidget1);
+        multicastIpaddrLineEdit = new QLineEdit(widget);
         multicastIpaddrLineEdit->setObjectName(QString::fromUtf8("multicastIpaddrLineEdit"));
 
         horizontalLayout_2->addWidget(multicastIpaddrLineEdit);
 
-        splitter_3->addWidget(layoutWidget1);
-        layoutWidget2 = new QWidget(splitter_3);
-        layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
-        horizontalLayout = new QHBoxLayout(layoutWidget2);
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+        horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        portLabel = new QLabel(layoutWidget2);
+        portLabel = new QLabel(widget);
         portLabel->setObjectName(QString::fromUtf8("portLabel"));
 
         horizontalLayout->addWidget(portLabel);
@@ -146,23 +148,29 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        portLineEdit = new QLineEdit(layoutWidget2);
+        portLineEdit = new QLineEdit(widget);
         portLineEdit->setObjectName(QString::fromUtf8("portLineEdit"));
 
         horizontalLayout->addWidget(portLineEdit);
 
-        splitter_3->addWidget(layoutWidget2);
+
+        verticalLayout->addLayout(horizontalLayout);
+
+        splitter_3->addWidget(widget);
         splitter_2->addWidget(splitter_3);
         splitter->addWidget(splitter_2);
-        layoutWidget3 = new QWidget(centralWidget);
-        layoutWidget3->setObjectName(QString::fromUtf8("layoutWidget3"));
-        layoutWidget3->setGeometry(QRect(10, 90, 123, 25));
-        horizontalLayout_4 = new QHBoxLayout(layoutWidget3);
+        widget1 = new QWidget(centralWidget);
+        widget1->setObjectName(QString::fromUtf8("widget1"));
+        widget1->setGeometry(QRect(10, 90, 251, 27));
+        horizontalLayout_5 = new QHBoxLayout(widget1);
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
-        startTransmitButton = new QPushButton(layoutWidget3);
+        startTransmitButton = new QPushButton(widget1);
         startTransmitButton->setObjectName(QString::fromUtf8("startTransmitButton"));
 
         horizontalLayout_4->addWidget(startTransmitButton);
@@ -171,11 +179,19 @@ public:
 
         horizontalLayout_4->addItem(horizontalSpacer_4);
 
+
+        horizontalLayout_5->addLayout(horizontalLayout_4);
+
+        modeSelectBox = new QComboBox(widget1);
+        modeSelectBox->setObjectName(QString::fromUtf8("modeSelectBox"));
+
+        horizontalLayout_5->addWidget(modeSelectBox);
+
         MainWindow->setCentralWidget(centralWidget);
-        layoutWidget->raise();
         showTheResvData->raise();
         showTheSendData->raise();
         splitter->raise();
+        modeSelectBox->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1280, 23));

@@ -38,6 +38,21 @@ int tcpServer::tcpServerOpen()
     return 0;
 }
 
+int tcpServer::tcpServerClose()
+{
+    if (this-pTcpServer->isListening())
+    {
+        this->pTcpServer->close();
+    }
+
+    if (this->pTcpSocketConnection->isOpen())
+    {
+        this->pTcpSocketConnection->close();
+    }
+
+    return 0;
+}
+
 /**
  * @brief tcpServer::acceptConnection
  * 当链接到来的时候补充pTcpSocketConnection参数
