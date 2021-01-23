@@ -1,15 +1,18 @@
 #ifndef TCPSERVER_H
 #define TCPSERVER_H
 
+#include <QObject>
 #include <QTcpSocket>
 #include <QTcpServer>
 #include <QString>
+#include <QByteArray>
+#include <QDebug>
 
-#define TCP_SERVER_MAX_CONNECTS 20
+class tcpServer : public QObject {
 
-class tcpServer {
+    Q_OBJECT
 public:
-    tcpServer(const QString& ip, unsigned short port);
+    tcpServer(const QString& ip, quint16 port);
     ~tcpServer();
     int tcpServerOpen();
 
@@ -17,10 +20,11 @@ private:
     QHostAddress *ip;
     QTcpServer *pTcpServer;
     QTcpSocket *pTcpSocketConnection;
-    unsigned port;
+    quint16 port;
 
-private slots:
+public slots:
     void acceptConnection();
+    void resvDataAndFlush();
 };
 
 #endif // TCPSERVER_H
