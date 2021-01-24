@@ -177,6 +177,7 @@ void MainWindow::tcpClientMode()
         this->ui->sendMsgButton->setEnabled(false);
         this->ui->modeSelectBox->setEnabled(true);
 
+        /* 在这里调用delete this->pTcpClient将会卡死，可能是Qt在底层做了内存的释放工作 */
         this->pTcpClient->tcpClientDisconnect();
         this->pTcpClient = NULL;
     }
