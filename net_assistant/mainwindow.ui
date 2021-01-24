@@ -66,7 +66,7 @@
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -154,7 +154,7 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -193,11 +193,35 @@
      </item>
     </layout>
    </widget>
+   <widget class="QTextEdit" name="msgSendTextEdit">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>10</y>
+      <width>331</width>
+      <height>101</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="sendMsgButton">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>120</y>
+      <width>331</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
    <zorder>layoutWidget</zorder>
    <zorder>showTheResvData</zorder>
    <zorder>showTheSendData</zorder>
    <zorder>splitter</zorder>
-   <zorder>modeSelectBox</zorder>
+   <zorder>msgSendTextEdit</zorder>
+   <zorder>sendMsgButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

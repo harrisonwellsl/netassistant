@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->startTransmitButton->setText(tr("&Start the network"));
     ui->startTransmitButton->setEnabled(false);
+    ui->sendMsgButton->setText("Send message");
+    ui->sendMsgButton->setEnabled(false);
 
     /**
      * 下拉菜单选择
@@ -109,10 +111,12 @@ void MainWindow::tcpClientMode()
     {
         /* 打开TCP客户端 */
         this->ui->startTransmitButton->setText("Close the network");
+        this->tcpClientOpened = true;
     }
     else
     {
         /* 关闭TCP客户端 */
         this->ui->startTransmitButton->setText("Start the network");
+        this->tcpClientOpened = false;
     }
 }
