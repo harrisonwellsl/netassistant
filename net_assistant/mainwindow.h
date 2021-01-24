@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "tcpserver.h"
+#include "tcpclient.h"
 
 namespace Ui {
 class MainWindow;
@@ -26,12 +27,14 @@ private:
 
     /* TCP 客户端定义 */
     bool tcpClientOpened;
-    //tcpServer *server;
+    tcpClient *pTcpClient;
     void tcpClientMode();
 
 public slots:
     void changeTxButton(QString ip);
     void startNetworkAssistant();
+
+    void sendMsg();
 };
 
 #endif // MAINWINDOW_H

@@ -8,9 +8,13 @@ MainWindow::MainWindow(QWidget *parent) :
     this->tcpServerOpened = false;
     this->tcpClientOpened = false;
 
+    this->server = NULL;
+    this->pTcpClient = NULL;
+
     ui->setupUi(this);
     ui->startTransmitButton->setText(tr("&Start the network"));
     ui->startTransmitButton->setEnabled(false);
+
     ui->sendMsgButton->setText("Send message");
     ui->sendMsgButton->setEnabled(false);
 
@@ -21,9 +25,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->modeSelectBox->addItem("UDP multicast");
     ui->modeSelectBox->addItem("TCP unicast");
     ui->modeSelectBox->addItem("TCP server");
+    ui->modeSelectBox->addItem("UDP server");
 
     QObject::connect(ui->ipaddrLineEdit, SIGNAL(textChanged(QString)), this, SLOT(changeTxButton(QString)));
     QObject::connect(ui->startTransmitButton, SIGNAL(clicked(bool)), this, SLOT(startNetworkAssistant()));
+    QObject::connect(ui->sendMsgButton, SIGNAL(clicked(bool)), this, SLOT(sendMsg()));
 }
 
 void MainWindow::changeTxButton(QString ip)
@@ -55,20 +61,34 @@ void MainWindow::startNetworkAssistant()
         qDebug() << "UDP multicast";
         break;
     case 2:
+        this->tcpClientMode();
         qDebug() << "TCP unicast";
         break;
     case 3:
         this->tcpServerMode();
         qDebug() << "TCP server";
         break;
+    case 4:
+        qDebug() << "UDP server";
+        break;
     default:
         break;
     }
 }
 
+void MainWindow::sendMsg()
+{
+    this->pTcpClient->send(this->ui->msgSendTextEdit->toPlainText());
+}
+
 MainWindow::~MainWindow()
 {
-    delete this->server;
+    /* 释放服务器内存 */
+    if (this->server != NULL)
+        delete this->server;
+    /* 释放客户端内存 */
+    if (this->pTcpClient != NULL)
+        delete this->pTcpClient;
     delete ui;
 }
 
@@ -112,11 +132,25 @@ void MainWindow::tcpClientMode()
         /* 打开TCP客户端 */
         this->ui->startTransmitButton->setText("Close the network");
         this->tcpClientOpened = true;
+        this->ui->sendMsgButton->setEnabled(true);
+        this->ui->modeSelectBox->setEnabled(false);
+
+        QString ip = this->ui->ipaddrLineEdit->text();
+        qint16 port = this->ui->portLineEdit->text().toUShort();
+
+        this->pTcpClient = new tcpClient(ip, port, this->ui->showTheSendData, this->ui->msgSendTextEdit);
+        pTcpClient->tcpClientConnect();
     }
     else
     {
         /* 关闭TCP客户端 */
         this->ui->startTransmitButton->setText("Start the network");
         this->tcpClientOpened = false;
+        this->ui->sendMsgButton->setEnabled(false);
+        this->ui->modeSelectBox->setEnabled(true);
+
+        this->pTcpClient->tcpClientDisconnect();
+        delete this->pTcpClient;
+        this->pTcpClient = NULL;
     }
 }
