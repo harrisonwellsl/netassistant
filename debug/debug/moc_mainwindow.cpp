@@ -22,7 +22,7 @@ static const uint qt_meta_data_MainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -30,16 +30,18 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      15,   12,   11,   11, 0x0a,
-      39,   11,   11,   11, 0x0a,
+      12,   11,   11,   11, 0x0a,
+      29,   11,   11,   11, 0x0a,
+      53,   11,   11,   11, 0x0a,
       63,   11,   11,   11, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_MainWindow[] = {
-    "MainWindow\0\0ip\0changeTxButton(QString)\0"
+    "MainWindow\0\0changeTxButton()\0"
     "startNetworkAssistant()\0sendMsg()\0"
+    "runTcpClientMode()\0"
 };
 
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -48,12 +50,14 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_ASSERT(staticMetaObject.cast(_o));
         MainWindow *_t = static_cast<MainWindow *>(_o);
         switch (_id) {
-        case 0: _t->changeTxButton((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 0: _t->changeTxButton(); break;
         case 1: _t->startNetworkAssistant(); break;
         case 2: _t->sendMsg(); break;
+        case 3: _t->runTcpClientMode(); break;
         default: ;
         }
     }
+    Q_UNUSED(_a);
 }
 
 const QMetaObjectExtraData MainWindow::staticMetaObjectExtraData = {
@@ -88,9 +92,9 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }

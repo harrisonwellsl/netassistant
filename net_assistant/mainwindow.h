@@ -31,10 +31,11 @@ private:
     void tcpClientMode();
 
 public slots:
-    void changeTxButton(QString ip);
+    void changeTxButton();
     void startNetworkAssistant();
 
     void sendMsg();
+    void runTcpClientMode();
 };
 
 #endif // MAINWINDOW_H

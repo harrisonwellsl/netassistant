@@ -6,6 +6,7 @@
 #include <QTextEdit>
 #include <QHostAddress>
 #include <QTextBrowser>
+#include <QAbstractSocket>
 
 class tcpClient : public QObject
 {
@@ -18,8 +19,10 @@ public:
     int tcpClientDisconnect();
 
 signals:
+    void tcpServerStateChanged();
 
 public slots:
+    void stateChangedMsg(QAbstractSocket::SocketState state);
 
 private:
     QTcpSocket *tcpClientPrivate;

@@ -23,6 +23,8 @@ int tcpClient::tcpClientConnect()
 {
     this->tcpClientPrivate = new QTcpSocket(this);
     this->tcpClientPrivate->connectToHost(*this->pHostAddress, this->port);
+
+    QObject::connect(this->tcpClientPrivate, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(stateChangedMsg(QAbstractSocket::SocketState)));
     return 0;
 }
 
@@ -37,4 +39,12 @@ int tcpClient::tcpClientDisconnect()
     if (this->tcpClientPrivate->isOpen())
         this->tcpClientPrivate->close();
     return 0;
+}
+
+void tcpClient::stateChangedMsg(QAbstractSocket::SocketState state)
+{
+    qDebug() << "stateChangedMsg run";
+    qDebug() << state;
+    if (QAbstractSocket::UnconnectedState == state)
+        emit tcpServerStateChanged();
 }

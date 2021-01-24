@@ -26,20 +26,38 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->modeSelectBox->addItem("TCP unicast");
     ui->modeSelectBox->addItem("TCP server");
 
-    QObject::connect(ui->ipaddrLineEdit, SIGNAL(textChanged(QString)), this, SLOT(changeTxButton(QString)));
+    QObject::connect(ui->ipaddrLineEdit, SIGNAL(textChanged(QString)), this, SLOT(changeTxButton()));
+    QObject::connect(ui->portLineEdit, SIGNAL(textChanged(QString)), this, SLOT(changeTxButton()));
+    QObject::connect(ui->multicastIpaddrLineEdit, SIGNAL(textChanged(QString)), this, SLOT(changeTxButton()));
     QObject::connect(ui->startTransmitButton, SIGNAL(clicked(bool)), this, SLOT(startNetworkAssistant()));
     QObject::connect(ui->sendMsgButton, SIGNAL(clicked(bool)), this, SLOT(sendMsg()));
 }
 
-void MainWindow::changeTxButton(QString ip)
+void MainWindow::changeTxButton()
 {
-    if (ip == "")
+    if (this->ui->modeSelectBox->currentIndex() != 1)
     {
-        this->ui->startTransmitButton->setEnabled(false);
+        if (this->ui->ipaddrLineEdit->text() == "" || this->ui->portLineEdit->text() == "")
+        {
+            this->ui->startTransmitButton->setEnabled(false);
+        }
+        else
+        {
+            this->ui->startTransmitButton->setEnabled(true);
+        }
     }
     else
     {
-        this->ui->startTransmitButton->setEnabled(true);
+        if (this->ui->ipaddrLineEdit->text() == "" ||
+             this->ui->portLineEdit->text() == "" ||
+             this->ui->multicastIpaddrLineEdit->text() == "")
+        {
+            this->ui->startTransmitButton->setEnabled(false);
+        }
+        else
+        {
+            this->ui->startTransmitButton->setEnabled(true);
+        }
     }
 }
 
@@ -75,6 +93,12 @@ void MainWindow::startNetworkAssistant()
 void MainWindow::sendMsg()
 {
     this->pTcpClient->send(this->ui->msgSendTextEdit->toPlainText());
+}
+
+void MainWindow::runTcpClientMode()
+{
+    qDebug() << "runTcpClientMode run";
+    this->tcpClientMode();
 }
 
 MainWindow::~MainWindow()
@@ -123,6 +147,7 @@ void MainWindow::tcpServerMode()
 
 void MainWindow::tcpClientMode()
 {
+    static bool signalConnected = false;
     if (this->tcpClientOpened == false)
     {
         /* 打开TCP客户端 */
@@ -135,6 +160,13 @@ void MainWindow::tcpClientMode()
         qint16 port = this->ui->portLineEdit->text().toUShort();
 
         this->pTcpClient = new tcpClient(ip, port, this->ui->showTheSendData, this->ui->msgSendTextEdit);
+
+        if (!signalConnected)
+        {
+            QObject::connect(this->pTcpClient, SIGNAL(tcpServerStateChanged()), this, SLOT(runTcpClientMode()));
+            signalConnected = true;
+        }
+
         pTcpClient->tcpClientConnect();
     }
     else
@@ -146,7 +178,6 @@ void MainWindow::tcpClientMode()
         this->ui->modeSelectBox->setEnabled(true);
 
         this->pTcpClient->tcpClientDisconnect();
-        delete this->pTcpClient;
         this->pTcpClient = NULL;
     }
 }
