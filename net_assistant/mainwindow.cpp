@@ -25,7 +25,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->modeSelectBox->addItem("UDP multicast");
     ui->modeSelectBox->addItem("TCP unicast");
     ui->modeSelectBox->addItem("TCP server");
-    ui->modeSelectBox->addItem("UDP server");
 
     QObject::connect(ui->ipaddrLineEdit, SIGNAL(textChanged(QString)), this, SLOT(changeTxButton(QString)));
     QObject::connect(ui->startTransmitButton, SIGNAL(clicked(bool)), this, SLOT(startNetworkAssistant()));
@@ -67,9 +66,6 @@ void MainWindow::startNetworkAssistant()
     case 3:
         this->tcpServerMode();
         qDebug() << "TCP server";
-        break;
-    case 4:
-        qDebug() << "UDP server";
         break;
     default:
         break;

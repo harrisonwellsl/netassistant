@@ -73,7 +73,9 @@ void tcpServer::resvDataAndFlush()
 {
     qDebug() << "resv data";
     QByteArray data = this->pTcpSocketConnection->readAll();
-    this->pTextBrowser->append(QString("TCP server: ") + QString(data));
+    this->pTextBrowser->append(QString("TCP server: ") + QString(data) + QString(" from: IP addr: ") +
+                               this->pTcpSocketConnection->peerAddress().toString() + QString(" Port: ") +
+                               QString::number(this->pTcpSocketConnection->peerPort()));
     qDebug() << data;
 }
 
