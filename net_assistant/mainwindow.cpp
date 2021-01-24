@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     this->tcpServerOpened = false;
+    this->tcpClientOpened = false;
 
     ui->setupUi(this);
     ui->startTransmitButton->setText(tr("&Start the network"));
@@ -98,6 +99,20 @@ void MainWindow::tcpServerMode()
         this->server = NULL;
         this->tcpServerOpened = false;
         this->ui->modeSelectBox->setEnabled(true);
+        this->ui->startTransmitButton->setText("Start the network");
+    }
+}
+
+void MainWindow::tcpClientMode()
+{
+    if (this->tcpClientOpened == false)
+    {
+        /* 打开TCP客户端 */
+        this->ui->startTransmitButton->setText("Close the network");
+    }
+    else
+    {
+        /* 关闭TCP客户端 */
         this->ui->startTransmitButton->setText("Start the network");
     }
 }

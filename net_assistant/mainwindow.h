@@ -24,6 +24,11 @@ private:
     tcpServer *server;
     void tcpServerMode();
 
+    /* TCP 客户端定义 */
+    bool tcpClientOpened;
+    //tcpServer *server;
+    void tcpClientMode();
+
 public slots:
     void changeTxButton(QString ip);
     void startNetworkAssistant();
